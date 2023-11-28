@@ -13,6 +13,8 @@ YtPlayer é um player de vídeo baseado no player do youtube. Trata-se de um peq
     ~~~
 
 [HTML5.io]: https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white
+[CSS3.io]: https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white
+[Typescript.io]: https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white
 
 [Angular-url]: https://angular.io/
 [Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
@@ -22,4 +24,6 @@ YtPlayer é um player de vídeo baseado no player do youtube. Trata-se de um peq
 ## Criado com
 
 * [![HTML5][HTML5.io]][HTML5.io]
+* [![CSS3][CSS3.io]][CSS3.io]
+* [![Typescript][Typescript.io]][Typescript.io]
 * [![Angular][Angular.io]][Angular-url]

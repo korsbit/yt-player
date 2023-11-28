@@ -21,5 +21,5 @@ YtPlayer é um player de vídeo baseado no player do youtube. Trata-se de um peq
 
 ## Criado com
 
-* [![HTML5]][HTML5.io]
+* [![HTML5][HTML5.io]]
 * [![Angular][Angular.io]][Angular-url]

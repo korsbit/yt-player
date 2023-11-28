@@ -12,11 +12,14 @@ YtPlayer é um player de vídeo baseado no player do youtube. Trata-se de um peq
     npm install
     ~~~
 
+[HTML5.io]: https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white
+
 [Angular-url]: https://angular.io/
 [Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
 
-## Instalação
+### 
 
 ## Criado com
 
+* [![HTML5]][HTML5.io]
 * [![Angular][Angular.io]][Angular-url]

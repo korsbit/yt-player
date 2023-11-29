@@ -33,6 +33,7 @@ Obs: Evite usar em conjunto o ‘height’ e ‘width’!
 <yt-player theme="dark" [src]="{'720': {'src': '/assets/videos/aurora.mp4'}}" height="700px" />
 ~~~
 resultado:
+    <img src="https://github.com/korsbit/yt-player/blob/main/screenshots/captura1.png"/>
 
 ## Criado com
 

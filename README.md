@@ -35,6 +35,8 @@ Obs: Evite usar em conjunto o ‘height’ e ‘width’!
 resultado:
     <img src="https://github.com/korsbit/yt-player/blob/main/screenshots/captura1.png"/>
 
+Obs: Para que o efeito cinematográfico funcione corretamente, o player de vídeo deve estar sobre um elemento de cores escuras, de preferência #0F0F0F.
+
 ## Criado com
 
 * [![HTML5][HTML5.io]][HTML5.io]

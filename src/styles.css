@@ -1,0 +1,87 @@
+/* You can add global styles to this file, and also import other style files */
+
+:root {
+    --studio-darkcolor0: #282828;
+    --studio-darkcolor1: #3d3d3d;
+	--studio-darkcolor2: #1f1f1f;
+	--studio-darkcolor3: #909090;
+
+	--studio-lightcolor0: white;
+	--studio-lightcolor1: #f9f9f9;
+	--studio-lightcolor2: #cdcdcd;
+	--studio-lightcolor3: #f9f9f9;
+
+	--darkcolor0: #0F0F0F;
+	--darkcolor1: #282828;
+	--darkcolor2: #222222;
+	--darkcolor3: #121212;
+	--darkcolor4: #333030;
+	--darkcolor5: #aaa;
+	--darkcolor6: #272727;
+	--darkcolor7: #424242;
+
+	--lightcolor0: white;
+	--lightcolor1: #606060;
+	--lightcolor2: #F8F8F8;
+	--lightcolor3: #CCCCCC;
+	--lightcolor4: #878787;
+	--lightcolor5: #E6E6E6;
+	--lightcolor6: #545454;
+	--lightcolor7: #F2F2F2;
+	--lightcolor8: #D1D1D1;
+
+	--bluecolor0: #3EA6FF;
+	--bluecolor1: #065FD4;
+
+	--yt-top-height: 3.75rem;
+}
+
+@font-face {
+	font-family: "Youtube Sans";
+	src: url("/assets/fonts/YoutubeSans/YouTubeSansRegular.otf") format("opentype");
+}
+
+@font-face {
+	font-family: "Youtube Sans Medium";
+	src: url("/assets/fonts/YoutubeSans/YouTubeSansMedium.otf") format("opentype");
+}
+
+@font-face {
+	font-family: "Youtube Sans Bold";
+	src: url("/assets/fonts/YoutubeSans/YouTubeSansBold.otf") format("opentype");
+}
+
+
+@font-face {
+	font-family: "Roboto";
+	src: url("/assets/fonts/Roboto/Roboto-Medium.ttf");
+	font-weight: 600;
+}
+
+
+@font-face {
+	font-family: "Roboto";
+	src: url("/assets/fonts/Roboto/Roboto-Regular.ttf");
+	font-weight: 500;
+}
+
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	font-family: Roboto, "Arial";
+}
+
+body {
+	width: 100%;
+	min-height: 100vh;
+	display: flex;
+	background-color: var(--darkcolor0);
+
+	align-items: center;
+	justify-content: center;
+}
+
+a {
+	text-decoration: none;
+}

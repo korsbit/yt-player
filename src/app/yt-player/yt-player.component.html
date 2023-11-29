@@ -1,0 +1,223 @@
+<div class="yt-player-comp full flex1" [ngClass]="[theme]" #playerComp>
+    <div class="player-video full flex2" (click)="playPauseClick()"
+    [ngClass]="[fullscreen ? 'fullscreen' : 'nofullscreen']">
+        <video #videoRef></video>
+        <div class="video-state-icon" *ngIf="!paused">
+            <img [src]="joinIconsPath('play')">
+        </div>
+
+        <div class="video-state-icon" *ngIf="paused">
+            <img [src]="joinIconsPath('pause')">
+        </div>
+
+        <div class="background-video" *ngIf="theme === 'dark'" [ngClass]="[showBV ? 'visible' : 'hidden']"
+            [style.width]="getBackgroundVideoWidth()">
+            <video #backVideoRef></video>
+        </div>
+    </div>
+
+    <div class="player-controls" #controlsRef
+                [style.top]="controlsTop + 'px'"
+                [style.width]="controlsWidth + 'px'"
+                [ngClass]="[showCV ? 'visible' : 'hidden', fullscreen ? 'fullscreen' : 'nofullscreen']">
+
+        <div class="video-loadbar-box flex2">
+            <div class="video-loadbar-outer" #loadBarOuterRef
+                (mousedown)="loadbarClick($event); mouseDown = true"
+                (mouseup)="mouseDown = false"
+                (mousemove)="showPreview($event)"
+                (mouseover)="showDP = true"
+                (mouseleave)="showDP = false; showPB = false">
+
+                <div class="video-loadbar" [ngClass]="[showDP ? 'hover' : 'nohover']" #loadBarRef>
+                    <div class="loaded" #loadedRef>
+                        <div class="watched" [ngClass]="[showDP ? 'hover' : 'nohover']" #watchedRef>
+                        </div>
+                        <div class="drag-pointer" [ngClass]="[showDP ? 'visible' : 'hidden']" #dragPointerRef></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="player-buttons">
+            <div class="left-buttons" 
+            (mouseenter)="controlsDA = false"
+            (mouseleave)="controlsDA = true">
+                <div class="play-button button" (click)="playPauseClick()">
+                    <img [src]="!paused ? joinIconsPath('pause') : joinIconsPath('play')">
+                </div>
+                <div class="next-button button">
+                    <img [src]="joinIconsPath('next')">
+                </div>
+                <div class="sound-button button"
+                        (mouseover)="showSR = true" 
+                        (mouseleave)="showSR = false">
+                    <img [src]="muted ? joinIconsPath('sound-muted') : joinIconsPath('sound')" (click)="soundClick()">
+
+                    <div class="sound-range-button button" 
+                        (mousedown)="mouseDown = true"
+                        (mousemove)="mouseDown ? onSoundRangeClick($event) : ''"
+                        (mouseleave)="mouseDown = false"
+                        (mouseup)="mouseDown = false"
+                        (click)="onSoundRangeClick($event)"
+                        [ngClass]="[showSR ? 'visible' : 'hidden']">
+                        <input type="range" min="0" max="1" step="0.01" (input)="onSoundRangeInput()"#soundRangeRef>
+                    </div>                    
+                </div>
+                <div class="video-time">
+                    <span>{{ videoMinutes }}:</span><span>{{ (videoSeconds / 10).toFixed(1).toString().replace('.', '') }}</span>
+                    <span>&nbsp; / &nbsp;</span>
+                    <span>{{ Math.floor(videoRef.duration / 60) }}:<span>{{ Math.floor(videoRef.duration % 60) }}</span></span>
+                </div>
+            </div>
+            <div class="right-buttons"
+            (mouseenter)="controlsDA = false"
+            (mouseleave)="controlsDA = true">
+                <div class="conf-button button" (click)="confClick($event)" [ngClass]="[showCB ? 'clicked' : '']">
+                    <img [src]="joinIconsPath('conf')">
+                </div>
+
+                <div class="fullscreen-button button fullscreen-enter" *ngIf="!fullscreen" (click)="fullscreenClick()">
+                    <img [src]="joinIconsPath('fullscreen')">
+                </div>
+
+                <div class="fullscreen-buttton button fullscreen-out" *ngIf="fullscreen" (click)="fullscreenClick()">
+                    <img [src]="joinIconsPath('fullscreen-out')">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="conf-options-box" [ngClass]="[showCB ? 'visible' : 'hidden', theme]" (click)="blankClick($event)" #confBoxRef>
+        <div class="conf-option-box cinema" (click)="cinemaClick()">
+            <div class="conf-option-left">
+                <div class="conf-option-icon">
+                    <img [src]="joinIconsPath('cinema')">
+                </div>
+                <div class="conf-option-name">
+                    <span>Iluminação Cinematográfica</span>
+                </div>
+            </div>
+            <div class="conf-option-right">
+                <div class="custom-button cinema-button activated" #cinemaBtnRef>
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="conf-option-box playback-speed" (click)="confPlayBackClick($event)">
+            <div class="conf-option-left">
+                <div class="conf-option-icon">
+                    <img [src]="joinIconsPath('playback')">
+                </div>
+                <div class="conf-option-name">
+                    <span>Velocidade de reprodução</span>
+                </div>   
+            </div>
+
+            <div class="conf-option-right">
+                <div class="conf-option-value">
+                    <span>{{ confOptions.playspeed }}</span>
+                </div>
+
+                <div class="go-forward">
+                    <img [src]="joinIconsPath('forward')">
+                </div>                 
+            </div>
+        </div>
+
+        <div class="conf-option-box quality" (click)="confQualityClick($event)">
+            <div class="conf-option-left">
+                <div class="conf-option-icon">
+                    <img [src]="joinIconsPath('adjust')">
+                </div>
+                <div class="conf-option-name">
+                    <span>Qualidade</span>
+                </div>
+            </div>
+            <div class="conf-option-right">
+                <div class="conf-option-value">
+                    <span>{{ confOptions.quality }}</span>
+                </div>
+                
+                <div class="go-forward">
+                    <img [src]="joinIconsPath('forward')">
+                </div>                  
+            </div>
+        </div>
+
+    </div>
+
+    <div class="conf-playback-box" [ngClass]="[showCPB ? 'visible' : 'hidden']" #confPlayBackRef (click)="blankClick($event)">
+        <div class="playback-title">
+            <div class="go-back flex1" (click)="showCPB = false; showCB = true">
+                <img [src]="joinIconsPath('back')">
+            </div>
+            <div class="playback-label">
+                <span>Velocidade de reprodução</span>
+            </div>
+        </div>
+
+        <div class="playback-options">
+            <div class="playback-option" *ngFor="let pb_value of playBackOptions" (click)="playbackChange(pb_value)">
+                <div class="playback-checked" [ngClass]="[confOptions.playspeed === pb_value ? 'setted' : '']">
+                    <img [src]="joinIconsPath('checked')">
+                </div>
+                <div class="playback-value">
+                    <span>{{ pb_value }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quality -->
+
+    <div class="conf-quality-box" [ngClass]="[showQB ? 'visible' : 'hidden']" #confQualityRef (click)="blankClick($event)">
+        <div class="quality-title">
+            <div class="go-back flex1" (click)="showQB = false; showCB = true">
+                <img [src]="joinIconsPath('back')">
+            </div>
+            <div class="quality-label">
+                <span>Qualidade</span>
+            </div>
+        </div>
+
+        <div class="quality-options">
+            <div class="quality-option" *ngFor="let pb_value of playQualityOptions" (click)="qualityChange(pb_value)">
+                <div class="quality-checked" [ngClass]="[confOptions.quality === pb_value ? 'setted' : '']">
+                    <img [src]="joinIconsPath('checked')">
+                </div>
+                <div class="quality-value">
+                    <span>{{ pb_value }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quality -->
+
+    <div class="context-menu" [ngClass]="[theme, showLB ? 'visible' : 'hidden']" #contextMenuRef>
+        <div class="context-option loop-option" (click)="loopClick()">
+            <div class="c-option-icon">
+                <img [src]="joinIconsPath('loop')" alt="">
+            </div>
+            <div class="c-option-name">
+                <span>Loop</span>
+            </div>
+
+            <div class="check-box" [ngClass]="[videoLoop ? 'checked' : 'nochecked']">
+                <img [src]="joinIconsPath('checked')">
+            </div>
+        </div>
+    </div>
+
+    <div class="preview-box" [style.visibility]="showPB ? 'visible' : 'hidden'" #previewBoxRef>
+        <canvas id="canvas"></canvas>
+
+        <div class="preview-time">
+            <span> {{ previewTime }} </span>
+        </div>
+    </div>
+</div>

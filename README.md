@@ -19,7 +19,20 @@ YtPlayer é um player de vídeo baseado no player do youtube. Trata-se de um peq
 [Angular-url]: https://angular.io/
 [Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
 
-### 
+### Manual de uso
+O player vem no formato de componente e possui quatro parâmetros:
+- src ({qualidade: {src: caminho_do_video}}): informação sobre o vídeo a ser reproduzido
+- theme (string): tema do player
+- height (string): altura do player
+- width (string): largura do player
+
+Obs: Evite usar em conjunto o ‘height’ e ‘width’!
+
+#### Exemplos
+~~~html
+<yt-player theme="dark" [src]="{'720': {'src': '/assets/videos/aurora.mp4'}}" height="700px" />
+~~~
+resultado:
 
 ## Criado com
 

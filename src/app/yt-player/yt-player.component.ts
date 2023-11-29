@@ -140,9 +140,6 @@ export class YtPlayerComponent implements OnInit, AfterViewInit, AfterContentIni
 	loadBarWidth: number = 0;
 	lastSoundRangeValue: number;
 
-	// previewMinutes: number = 0;
-	// previewSeconds: number = 0;
-
 	duration: string;
 	previewTime: string;
 
@@ -250,16 +247,6 @@ export class YtPlayerComponent implements OnInit, AfterViewInit, AfterContentIni
 	}
 
 	initEvents() {
-		// this.videoRef.nativeElement.onloadeddata = () => {
-		// 	this.controlsTop = this.calcControlsTop();
-		// 	this.controlsWidth = this.calcControlsWidth();
-		// 	this.disappearCount();
-		// 	this.correctSoundRangeInput();
-		// 	console.log(true);
-		// 	this.duration = `${Math.floor(this.videoRef.nativeElement.duration / 60)}:${Math.floor(this.videoInterval.nativeElement.duration % 60)}`;
-
-		// };
-
 		this.videoRef.nativeElement.onloadedmetadata = () => {
 			this.controlsTop = this.calcControlsTop();
 			this.controlsWidth = this.calcControlsWidth();
